@@ -1,0 +1,2 @@
+class ColourTheme < ApplicationRecord
+end

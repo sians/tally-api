@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_24_141127) do
+ActiveRecord::Schema.define(version: 2020_02_25_100048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "colour_themes", force: :cascade do |t|
+    t.string "dark"
+    t.string "light"
+    t.string "highlight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "jwt_blacklists", force: :cascade do |t|
     t.string "jti"
@@ -21,6 +29,25 @@ ActiveRecord::Schema.define(version: 2020_02_24_141127) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["jti"], name: "index_jwt_blacklists_on_jti"
+  end
+
+  create_table "panels", force: :cascade do |t|
+    t.string "name"
+    t.bigint "colour_theme_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["colour_theme_id"], name: "index_panels_on_colour_theme_id"
+    t.index ["user_id"], name: "index_panels_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "text"
+    t.boolean "completed"
+    t.bigint "panel_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["panel_id"], name: "index_tasks_on_panel_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +64,7 @@ ActiveRecord::Schema.define(version: 2020_02_24_141127) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "panels", "colour_themes"
+  add_foreign_key "panels", "users"
+  add_foreign_key "tasks", "panels"
 end
