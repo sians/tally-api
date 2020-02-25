@@ -3,9 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+
+# Pry for pretty console
+gem 'pry'
 # Use Pundit for authorization
 gem 'pundit'
-
 # Use Devise for authentication
 gem 'devise'
 # Use JWT as authentication token

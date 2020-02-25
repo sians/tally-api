@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dark: MyString
+  light: MyString
+  highlight: MyString
+
+two:
+  dark: MyString
+  light: MyString
+  highlight: MyString
