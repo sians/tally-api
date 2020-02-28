@@ -1,5 +1,5 @@
 class ColourThemes::DestroyService < BaseService
-  attr_accessor :id
+  attr_accessor :colour_theme
 
   def call_after_validation
     destroy_colour_theme
@@ -8,8 +8,7 @@ class ColourThemes::DestroyService < BaseService
   end
 
   def destroy_colour_theme
-    colour_theme = ColourTheme.find(@id)
-    colour_theme.destroy
+    @colour_theme.destroy
   end
 
   def valid?

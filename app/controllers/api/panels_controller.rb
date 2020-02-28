@@ -1,32 +1,39 @@
 class Api::PanelsController < ApplicationController
-  before_action :set_panels
   before_action :permitted_params, only: [:create, :update]
 
   def index
-    render json: PanelSerializer.new(@panels, options).serialized_json
+    render json: PanelSerializer.new(panels, options).serialized_json
   end
 
   def create
-    # create_params = @panel_params.merge(user: current_user)
-    create_params = @panel_params.merge(user: User.first)
+    create_params = @panel_params.merge(user: current_user)
 
     service = Panels::CreateService.new(create_params)
 
     if service.call
-      render json: PanelSerializer.new(set_panels, options)
+      render json: PanelSerializer.new(panels, options)
     else
       render_unprocessable_entity!(service.errors)
     end
   end
 
   def update
-    set_panel(@panel_params[:id])
-    update_params = @panel_params.merge(panel: @panel)
+    update_params = @panel_params.merge(panel: panel)
 
     service = Panels::UpdateService.new(update_params)
 
     if service.call
-      render json: PanelSerializer.new(set_panels, options)
+      render json: PanelSerializer.new(panels, options)
+    else
+      render_unprocessable_entity!(service.errors)
+    end
+  end
+
+  def destroy
+    service = Panels::DestroyService.new(panel: panel)
+
+    if service.call
+      render_json_success
     else
       render_unprocessable_entity!(service.errors)
     end
@@ -34,14 +41,12 @@ class Api::PanelsController < ApplicationController
 
   private
 
-  def set_panels
-    # @panels = Panel.eager_load(:task).where(user: current_user)
-    @panels = Panel.eager_load(:tasks, :colour_theme).where(user_id: 1)
+  def panels
+    @panels = Panel.eager_load(:tasks).where(user: current_user)
   end
 
-  def set_panel(id)
-    @panel = Panel.find(id)
-    render_not_found! unless @panel
+  def panel
+    @panel ||= Panel.find(params[:id])
   end
 
   def permitted_params

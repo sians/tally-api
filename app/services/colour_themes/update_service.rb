@@ -1,5 +1,4 @@
 class ColourThemes::UpdateService < BaseService
-  attr_accessor :id
   attr_accessor :light
   attr_accessor :dark
   attr_accessor :highlight

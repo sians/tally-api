@@ -1,9 +1,7 @@
 class Api::SessionsController < Devise::SessionsController
-  respond_to :json
 
-  def create
-    super { |resource| @resource = resource }
+  def respond_with(resource, _opts = {})
+    render json: UserSerializer.new(resource).serialized_json
   end
-
 
 end

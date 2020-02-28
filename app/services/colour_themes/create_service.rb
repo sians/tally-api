@@ -2,8 +2,11 @@ class ColourThemes::CreateService < BaseService
   attr_accessor :light
   attr_accessor :dark
   attr_accessor :highlight
+  attr_accessor :user
 
   attr_accessor :colour_theme
+
+  validates :user, presence: true
 
   def call_after_validation
     create_colour_theme
@@ -15,7 +18,8 @@ class ColourThemes::CreateService < BaseService
     @colour_theme = ColourTheme.create(
       light: @light,
       dark: @dark,
-      highlight: @highlight
+      highlight: @highlight,
+      user: @user
     )
   end
 
@@ -26,5 +30,4 @@ class ColourThemes::CreateService < BaseService
 
     false
   end
-
 end
