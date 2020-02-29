@@ -13,13 +13,15 @@ sian = User.create(email: "sian.m.stone@gmail.com", password: "foobar", username
 pinks = ColourTheme.create(
   dark: 'rgb(248, 88, 88)',
   light: 'rgba(255, 220, 220)',
-  highlight: 'rgb(250, 237, 237)'
+  highlight: 'rgb(250, 237, 237)',
+  user: sian
 )
 
 purples = ColourTheme.create(
   dark: 'rgb(193, 86, 255)',
   light: 'rgb(238, 220, 255)',
-  highlight: 'rgb(249, 243, 254)'
+  highlight: 'rgb(249, 243, 254)',
+  user: sian
 )
 
 # blues = ColourTheme.create(
@@ -35,13 +37,13 @@ someday = Panel.create(name: "someday", colour_theme: pinks, user: sian)
 
 
 # T A S K S
-Task.create(text: "Learn about react", completed: false, panel: today)
-Task.create(text: "Feed unicorn", completed: false, panel: today)
-Task.create(text: "code some stuff", completed: false, panel: today)
+Task.create(user: sian, text: "Learn about react", completed: false, panel: today)
+Task.create(user: sian, text: "Feed unicorn", completed: false, panel: today)
+Task.create(user: sian, text: "code some stuff", completed: false, panel: today)
 
-Task.create(text: "Sign up for machine learning course at NOVA", completed: false, panel: soon)
-Task.create(text: "Order hardcopy of The Order Of Time", completed: false, panel: soon)
+Task.create(user: sian, text: "Sign up for machine learning course at NOVA", completed: false, panel: soon)
+Task.create(user: sian, text: "Order hardcopy of The Order Of Time", completed: false, panel: soon)
 
-Task.create(text: "Buy an Island", completed: false, panel: someday)
-Task.create(text: "PhD in particle physics", completed: false, panel: someday)
+Task.create(user: sian, text: "Buy an Island", completed: false, panel: someday)
+Task.create(user: sian, text: "PhD in particle physics", completed: false, panel: someday)
 

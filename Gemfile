@@ -14,6 +14,9 @@ gem 'devise'
 gem 'devise-jwt', '~> 0.5.9'
 gem 'dry-configurable', '0.9.0'
 
+# Use fast_jsonapi for JSON serialization
+gem 'fast_jsonapi'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use postgresql as the database for Active Record

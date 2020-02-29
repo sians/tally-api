@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_100048) do
+ActiveRecord::Schema.define(version: 2020_02_28_162440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2020_02_25_100048) do
     t.string "highlight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_colour_themes_on_user_id"
   end
 
   create_table "jwt_blacklists", force: :cascade do |t|
@@ -37,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_02_25_100048) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
     t.index ["colour_theme_id"], name: "index_panels_on_colour_theme_id"
     t.index ["user_id"], name: "index_panels_on_user_id"
   end
@@ -47,7 +50,10 @@ ActiveRecord::Schema.define(version: 2020_02_25_100048) do
     t.bigint "panel_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.integer "status", default: 0
     t.index ["panel_id"], name: "index_tasks_on_panel_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,7 +70,9 @@ ActiveRecord::Schema.define(version: 2020_02_25_100048) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "colour_themes", "users"
   add_foreign_key "panels", "colour_themes"
   add_foreign_key "panels", "users"
   add_foreign_key "tasks", "panels"
+  add_foreign_key "tasks", "users"
 end
