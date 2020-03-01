@@ -42,7 +42,7 @@ class Api::PanelsController < ApplicationController
   private
 
   def panels
-    @panels = Panel.eager_load(:tasks, :colour_theme).where(user: current_user)
+    @panels = Panel.eager_load(:tasks, :colour_theme).where(user: User.first)
   end
 
   def panel
