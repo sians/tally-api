@@ -24,16 +24,17 @@ purples = ColourTheme.create(
   user: sian
 )
 
-# blues = ColourTheme.create(
-#   dark: 'rgb(248, 88, 88)',
-#   light: 'rgba(255, 220, 220)',
-#   highlight: 'rgb(250,  237, 237)'
-# )
+gold = ColourTheme.create(
+  dark: 'rgb(243, 193, 92)',
+  light: 'rgba(255, 233, 167)',
+  highlight: 'rgb(255,  252, 211)',
+  user: sian
+)
 
 # P A N E L S
 today = Panel.create(name: "today", colour_theme: pinks, user: sian)
 soon = Panel.create(name: "soon", colour_theme: purples, user: sian)
-someday = Panel.create(name: "someday", colour_theme: pinks, user: sian)
+someday = Panel.create(name: "someday", colour_theme: gold, user: sian)
 
 
 # T A S K S

@@ -53,8 +53,6 @@ class Api::TasksController < ApplicationController
     @tasks = Task.eager_load(:panel).where(user: current_user)
   end
 
-
-
   def permitted_params
     @task_params = params.require(:task).permit(
       :text,
